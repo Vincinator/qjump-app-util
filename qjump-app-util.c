@@ -40,6 +40,8 @@
 #include <stdarg.h>
 #include <netinet/in.h>
 #include <netinet/ip.h>
+#include <errno.h>
+#include <string.h>
 
 
 #define FAMS 12
@@ -170,7 +172,7 @@ void set_opts(int sockfd, int priority, int window_size, char* fn)
 {
     int ret = setsockopt(sockfd, SOL_SOCKET, SO_PRIORITY, &priority, sizeof(priority));
     if(ret != 0){
-        formatout(0,"Failed setting priority to %i in %s() call!\n", priority, fn);
+        formatout(0,"(%s) Failed setting priority to %i in %s() call!\n", strerror(errno), priority, fn);
         exit(-1);
         return;
     }
@@ -178,7 +180,7 @@ void set_opts(int sockfd, int priority, int window_size, char* fn)
 
     ret = setsockopt(sockfd, SOL_SOCKET, SO_RCVBUF, &window_size, sizeof(window_size));
     if(ret != 0){
-        formatout(0,"Failed setting RCV window size to %i in %s() call!\n", window_size, fn);
+        formatout(0,"(%s) Failed setting RCV window size to %i in %s() call!\n", strerror(errno), window_size, fn);
         exit(-1);
         return;
     }
@@ -186,7 +188,7 @@ void set_opts(int sockfd, int priority, int window_size, char* fn)
 
     ret = setsockopt(sockfd, SOL_SOCKET, SO_SNDBUF, &window_size, sizeof(window_size));
     if(ret != 0){
-        formatout(0,"Failed setting SND window size to %i in %s() call!\n", window_size, fn);
+        formatout(0,"(%s) Failed setting SND window size to %i in %s() call!\n", strerror(errno), window_size, fn);
         exit(-1);
         return;
     }
