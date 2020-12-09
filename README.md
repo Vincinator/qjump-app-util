@@ -4,7 +4,7 @@ QJump Application Utility
 This tool is used to modify the socket options of binaries so that they can be used directly with QJump. 
 
 ## Build
-Requirements: ```apt install libc6-dev```
+Requirements: ```apt install libc6-dev```.
 To complie run ```make``` in the source directory. 
 
 ## Example
